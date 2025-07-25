@@ -1,2 +1,4 @@
-# gestion_de_projet
-Next.js, React
+# E-commerce Project
+Node.js
+Express.js
+Prisma (ORM SQL)
