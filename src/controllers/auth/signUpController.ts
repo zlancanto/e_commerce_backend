@@ -3,9 +3,15 @@ import {prisma} from "../../vars/prisma";
 import {genSalt, hash} from "bcrypt";
 import {ErrorCode, StatusCode} from "../../exceptions/enum";
 import {createHttpException} from "../../exceptions/factory";
+import {SignUpSchema} from "../../schemas/user.schema";
+import {validateAndParse} from "../../utils/zod";
 
-export const signupController = async (req: Request, res: Response) => {
-    const {email, password, name} = req.body;
+export const signUpController = async (req: Request, res: Response) => {
+    // Validation Zod
+    const data = validateAndParse(SignUpSchema, req.body, res);
+    if (!data) { return; }
+
+    const { email, password, name } = data;
 
     try {
         let user = await prisma.user.findUnique({
@@ -14,7 +20,6 @@ export const signupController = async (req: Request, res: Response) => {
 
         if (user) {
             throw createHttpException("L'utilisateur existe déjà", ErrorCode.USER_ALREADY_EXISTS, StatusCode.BAD_REQUEST);
-            //return res.status(409).json({SignUpError : "L'utilisateur existe déjà"});
         }
 
         user = await prisma.user.create({

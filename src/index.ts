@@ -11,7 +11,7 @@ app.use(express.json())
 app.use('/api', rootRouter);
 
 // Error middleware
-//app.use(errorsMiddleware)
+app.use(errorsMiddleware)
 
 // Listening
 const port = PORT || 9000;
