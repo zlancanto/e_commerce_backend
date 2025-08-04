@@ -7,6 +7,9 @@ export enum ErrorCode {
     // 2000–2999 => Erreurs liées aux produits, objets métiers
     // 3000–3999 => Erreurs liées aux paiements, transactions
     // 4000–4999 =>	Erreurs liées aux droits, permissions
+    UNAUTHORIZED = 4001,
+    NOT_TOKEN_EXIST = 4002,
+
     // 5000–5999 =>	Erreurs système, serveur, ou non classées
     ENV_VARIABLE_NOT_DEFINED = 5001,
 }

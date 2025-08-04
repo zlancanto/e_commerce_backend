@@ -5,6 +5,7 @@ import {ErrorCode, StatusCode} from "../../exceptions/enum";
 import {createHttpException} from "../../exceptions/factory";
 import {SignUpSchema} from "../../schemas/user.schema";
 import {validateAndParse} from "../../utils/zod";
+import {User} from "@prisma/client";
 
 export const signUpController = async (req: Request, res: Response) => {
     // Validation Zod
@@ -14,8 +15,9 @@ export const signUpController = async (req: Request, res: Response) => {
     const { email, password, name } = data;
 
     try {
-        let user = await prisma.user.findUnique({
-            where: {email}
+        let user: Omit<User, 'password'> | null = await prisma.user.findUnique({
+            where: {email},
+            omit: {password: true}
         });
 
         if (user) {
@@ -27,7 +29,8 @@ export const signUpController = async (req: Request, res: Response) => {
                 name,
                 email,
                 password: await hash(password, await genSalt())
-            }
+            },
+            omit: {password: true}
         });
 
         res.status(StatusCode.OK).json(user);

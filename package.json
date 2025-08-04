@@ -4,7 +4,7 @@
   "description": "Node.js\r Express.js\r Prisma (ORM SQL)",
   "main": "index.js",
   "scripts": {
-    "launch": "nodemon ./src/index.ts",
+    "launch": "nodemon src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/zlancanto/e_commerce_backend#readme",
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.9",
     "@types/express": "^5.0.3",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.1.0",
@@ -33,6 +34,7 @@
     "@prisma/extension-optimize": "^2.0.0",
     "@prisma/instrumentation": "^6.12.0",
     "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",

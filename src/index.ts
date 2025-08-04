@@ -2,10 +2,12 @@ import express, {Express} from 'express';
 import {PORT} from "./vars/env";
 import rootRouter from "./routes";
 import {errorsMiddleware} from "./middlewares/errors.middleware";
+import cookieParser from "cookie-parser";
 
 const app: Express = express();
 
 app.use(express.json())
+app.use(cookieParser())
 
 // Routes
 app.use('/api', rootRouter);

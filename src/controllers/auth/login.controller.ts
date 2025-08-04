@@ -24,7 +24,7 @@ export const loginController = async (req: Request, res: Response) => {
             throw createHttpException("JWT_SECRET non défini dans les variables d'environnement", ErrorCode.ENV_VARIABLE_NOT_DEFINED, StatusCode.INTERNAL_SERVER_ERROR);
         }
 
-        const token = jwt.sign({userId: user.id}, JWT_SECRET);
+        const token = jwt.sign({userId: user.id}, JWT_SECRET, {expiresIn: MAX_AGE});
         res.cookie('jwt', token, {
             httpOnly: true,
             maxAge: MAX_AGE,
