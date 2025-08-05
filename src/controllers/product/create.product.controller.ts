@@ -1,7 +1,7 @@
 import {Request, Response} from 'express'
 import {prisma} from "../../vars/prisma"
 import {validateAndParse} from "../../utils/zod";
-import {CreateProductSchema} from "../../schemas/product.schema";
+import {CreateProductSchema} from "../../schemas/create.product.schema";
 import {StatusCode} from "../../exceptions/enum";
 
 export const createProductController = async (req: Request, res: Response) => {

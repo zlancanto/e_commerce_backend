@@ -27,7 +27,7 @@ model User {
 model Product {
   id Int @id @default(autoincrement())
   name String
-  description String @default("")
+  description String @default("") @db.Text
   price Decimal
   tags String @default("")
   createdAt DateTime @default(now())
