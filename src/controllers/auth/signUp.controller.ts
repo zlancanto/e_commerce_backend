@@ -3,7 +3,7 @@ import {prisma} from "../../vars/prisma";
 import {genSalt, hash} from "bcrypt";
 import {ErrorCode, StatusCode} from "../../exceptions/enum";
 import {createHttpException} from "../../exceptions/factory";
-import {SignUpSchema} from "../../schemas/user.schema";
+import {SignUpSchema} from "../../schemas/user/user.schema";
 import {validateAndParse} from "../../utils/zod";
 import {User} from "@prisma/client";
 

@@ -1,9 +1,12 @@
 import {PrismaClient} from "@prisma/client";
-import {SignUpSchema} from "../schemas/user.schema";
-import {CreateProductSchemaPrisma} from "../schemas/create.product.schema";
-import {UpdateProductSchemaPrisma} from "../schemas/update.product.schema";
-import {GetProductSchemaPrisma} from "../schemas/get.product.schema";
-import {DeleteProductSchemaPrisma} from "../schemas/delete.product.schema";
+import {SignUpSchema} from "../schemas/user/user.schema";
+import {CreateProductSchemaPrisma} from "../schemas/product/create.product.schema";
+import {UpdateProductSchemaPrisma} from "../schemas/product/update.product.schema";
+import {GetProductSchemaPrisma} from "../schemas/product/get.product.schema";
+import {DeleteProductSchemaPrisma} from "../schemas/product/delete.product.schema";
+import {CreateAddressSchemaPrisma} from "../schemas/address/create.address.schema";
+import {GetAddressSchemaPrisma} from "../schemas/address/get.address.schema";
+import {DeleteAddressSchemaPrisma} from "../schemas/address/delete.address.schema";
 
 export const prisma = new PrismaClient({
     log: ['info','query'],
@@ -31,6 +34,20 @@ export const prisma = new PrismaClient({
             },
             delete({args, query}) {
                 args.where = DeleteProductSchemaPrisma.parse(args.where);
+                return query(args);
+            }
+        },
+        address: {
+            create({args, query}) {
+                args.data = CreateAddressSchemaPrisma.parse(args.data);
+                return query(args);
+            },
+            findUnique({args, query}) {
+                args.where =GetAddressSchemaPrisma.parse(args.where)
+                return query(args)
+            },
+            delete({args, query}) {
+                args.where = DeleteAddressSchemaPrisma.parse(args.where);
                 return query(args);
             }
         }

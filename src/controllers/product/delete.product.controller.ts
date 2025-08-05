@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {prisma} from "../../vars/prisma";
 import {validateAndParse} from "../../utils/zod";
-import {GetProductSchema} from "../../schemas/get.product.schema";
+import {GetProductSchema} from "../../schemas/product/get.product.schema";
 import {StatusCode} from "../../exceptions/enum";
 import {PrismaExceptionData} from "../../types/prisma/prisma.exception.data";
 import {handlerPrismaException} from "../../exceptions/handler.prisma.exception";
@@ -19,7 +19,7 @@ export const deleteProductController = async (req: Request, res: Response) => {
     }
     catch (err: any) {
         const errData: PrismaExceptionData = {
-            message: `Aucun produit avec l'id ${id} n'a été trouvé pour la suppression`
+            message2025: `Aucun produit avec l'id ${id} n'a été trouvé pour la suppression`
         };
         handlerPrismaException(err, errData)
 

@@ -1,6 +1,6 @@
 import {RefinementCtx, z} from "zod";
-import {REGEX_PASSWORD} from "../vars/regex";
-import {CRITERIA_PASSWORD} from "../vars/criteria";
+import {REGEX_PASSWORD} from "../../vars/regex";
+import {CRITERIA_PASSWORD} from "../../vars/criteria";
 
 const getIssue = (issue: string) => {
     return {message: `Au moins ${issue}`}

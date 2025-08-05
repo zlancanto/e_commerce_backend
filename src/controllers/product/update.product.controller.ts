@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import {validateAndParse} from "../../utils/zod";
 import {prisma} from "../../vars/prisma";
-import {UpdateProductSchema} from "../../schemas/update.product.schema";
+import {UpdateProductSchema} from "../../schemas/product/update.product.schema";
 import {StatusCode} from "../../exceptions/enum";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import {handlerPrismaException} from "../../exceptions/handler.prisma.exception";
@@ -21,7 +21,7 @@ export const updateProductController = async (req: Request, res: Response) => {
     }
     catch (err: any) {
         const errData: PrismaExceptionData = {
-            message: `Aucun produit avec l'id ${id} n'a été trouvé pour une mise à jour.`
+            message2025: `Aucun produit avec l'id ${id} n'a été trouvé pour une mise à jour.`
         }
         handlerPrismaException(err, errData)
         console.debug('UpdateProductError = ', err)

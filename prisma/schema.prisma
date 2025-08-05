@@ -17,11 +17,29 @@ model User {
   name String
   email String @unique
   password String
+  defaultShippingAddress Int?
+  defaultBillingAddress Int?
   role Role @default(USER)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  address Address?
 
   @@map("users")
+}
+
+model Address {
+  id Int @id @default(autoincrement())
+  address String
+  complement String @default("")
+  postalCode Int
+  city String
+  country String
+  user User @relation(fields: [userId], references: [id])
+  userId Int @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("addresses")
 }
 
 model Product {

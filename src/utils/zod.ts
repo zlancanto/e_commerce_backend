@@ -1,4 +1,4 @@
-import { z, ZodSchema } from "zod";
+import { ZodSchema } from "zod";
 import { Response } from "express";
 import { StatusCode } from "../exceptions/enum";
 

@@ -1,6 +1,6 @@
 import {z} from 'zod';
 
-export const GetProductSchema = z.object({
+export const GetIdSchema = z.object({
     id: z.preprocess(
         (a: unknown) => {
             if (typeof a === 'number') { return a; }
@@ -10,5 +10,3 @@ export const GetProductSchema = z.object({
             .positive("L'id doit être un entier positif"),
     )
 });
-
-export const GetProductSchemaPrisma = GetProductSchema;

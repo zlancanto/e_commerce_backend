@@ -1,3 +1,4 @@
 export interface PrismaExceptionData {
-    message?: string,
+    message2002?: string,
+    message2025?: string,
 }
