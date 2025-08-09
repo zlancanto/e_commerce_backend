@@ -21,7 +21,7 @@ export const updateProductController = async (req: Request, res: Response) => {
     }
     catch (err: any) {
         const errData: PrismaExceptionData = {
-            message2025: `Aucun produit avec l'id ${id} n'a été trouvé pour une mise à jour.`
+            message2025: `Aucun Produit avec l'id ${id} n'a été trouvé pour une mise à jour.`
         }
         handlerPrismaException(err, errData)
         console.debug('UpdateProductError = ', err)

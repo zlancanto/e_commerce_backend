@@ -17,7 +17,7 @@ export const deleteAddressController = async (req: Request, res: Response) => {
     }
     catch (err: any) {
         const errData: PrismaExceptionData = {
-            message2025: `Aucune ${err.meta.modelName} avec l'id ${id} n'a été trouvé pour la suppression`
+            message2025: `Aucune Address avec l'id ${id} n'a été trouvé pour la suppression`
         }
         handlerPrismaException(err, errData)
 

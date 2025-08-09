@@ -19,7 +19,7 @@ export const getProductController = async (req: Request, res: Response) => {
     }
     catch (err: any) {
         const errData: PrismaExceptionData = {
-            message2025: `Aucun produit avec l'id ${id} n'a été trouvé`
+            message2025: `Aucun Produit avec l'id ${id} n'a été trouvé`
         };
         handlerPrismaException(err, errData)
         console.debug('CreateProductError = ', err);

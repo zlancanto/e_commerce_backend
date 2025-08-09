@@ -29,7 +29,7 @@ export const createAddressController = async (req: Request, res: Response) => {
     } catch (err: any) {
         const errData: PrismaExceptionData = {
             message2002: `Ce User a déjà une adresse`,
-            message2025: `Aucun ${err.meta.modelName} avec l'id ${data.userId} n'a été trouvé`
+            message2025: `Aucune Address avec l'id ${data.userId} n'a été trouvé`
         };
         handlerPrismaException(err, errData);
         console.debug('CreateAddressError = ', err);
