@@ -5,6 +5,7 @@ export enum ErrorCode {
     INCORRECT_PASSWORD = 1003,
 
     // 2000–2999 => Erreurs liées aux produits, objets métiers
+    NOT_NEGATIVE_VALUE = 2000,
     // 3000–3999 => Erreurs liées aux paiements, transactions
     // 4000–4999 =>	Erreurs liées aux droits, permissions
     UNAUTHORIZED = 4001,

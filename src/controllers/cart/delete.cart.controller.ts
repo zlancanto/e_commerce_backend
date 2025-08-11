@@ -6,17 +6,20 @@ import {StatusCode} from "../../exceptions/enum";
 import {PrismaExceptionData} from "../../types/prisma/prisma.exception.data";
 import {handlerPrismaException} from "../../exceptions/handler.prisma.exception";
 
-export const getCartController = async (req: Request, res: Response) => {
+export const deleteCartController = async (req: Request, res: Response) => {
     const id = +req.params.id;
     const data = validateAndParse(GetIdSchema, {id}, res);
     if (!data) { return; }
 
     try {
-        const cart = await prisma.cart.findUniqueOrThrow({
+        const productInCartDeleted = await prisma.productInCart.deleteMany({
+            where: { cartId: id }
+        });
+        const cartDeleted = await prisma.cart.delete({
             where: {id}
         });
 
-        res.status(StatusCode.OK).json(cart);
+        res.status(StatusCode.OK).json(cartDeleted);
     }
     catch (err: any) {
         const errData: PrismaExceptionData = {
@@ -24,9 +27,9 @@ export const getCartController = async (req: Request, res: Response) => {
         };
         handlerPrismaException(err, errData);
 
-        console.debug('GetCartError = ', err);
+        console.debug('DeleteCartError = ', err);
         res.status(err.status || StatusCode.INTERNAL_SERVER_ERROR).json({
-            GetCartError: err
+            DeleteCartError: err
         });
     }
 }

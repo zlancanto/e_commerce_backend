@@ -1,12 +1,13 @@
-import {Request, Response} from "express";
+import {Request, Response, NextFunction} from "express";
 import {prisma} from "../../vars/prisma";
 import {compare} from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import {JWT_SECRET, MAX_AGE} from "../../vars/jwt";
 import {ErrorCode, StatusCode} from "../../exceptions/enum";
 import {createHttpException} from "../../exceptions/factory";
+import {CHttpException} from "../../exceptions/CHttp.exception";
 
-export const loginController = async (req: Request, res: Response) => {
+export const loginController = async (req: Request, res: Response, next: NextFunction) => {
     const {email, password} = req.body;
 
     try {
@@ -34,9 +35,13 @@ export const loginController = async (req: Request, res: Response) => {
 
         const {password: removed, ...userWithoutPassword} = user;
         res.status(StatusCode.OK).json(userWithoutPassword);
-    }
-    catch (err: any) {
+    } catch (err: any) {
         console.debug('LoginError = ', err);
-        res.status(err.status || StatusCode.INTERNAL_SERVER_ERROR).json({LoginError: err});
+        if (err instanceof CHttpException) {
+            next(err);
+        }
+        else {
+            res.status(err.status || StatusCode.INTERNAL_SERVER_ERROR).json({LoginError: err});
+        }
     }
 }

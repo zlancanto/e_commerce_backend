@@ -1,4 +1,4 @@
-import {Request, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 import {prisma} from "../../vars/prisma";
 import {genSalt, hash} from "bcrypt";
 import {ErrorCode, StatusCode} from "../../exceptions/enum";
@@ -6,13 +6,16 @@ import {createHttpException} from "../../exceptions/factory";
 import {SignUpSchema} from "../../schemas/user/signup.user.schema";
 import {validateAndParse} from "../../utils/zod";
 import {User} from "@prisma/client";
+import {CHttpException} from "../../exceptions/CHttp.exception";
 
-export const signUpController = async (req: Request, res: Response) => {
+export const signUpController = async (req: Request, res: Response, next: NextFunction) => {
     // Validation Zod
     const data = validateAndParse(SignUpSchema, req.body, res);
-    if (!data) { return; }
+    if (!data) {
+        return;
+    }
 
-    const { email, password, name } = data;
+    const {email, password, name} = data;
 
     try {
         let user: Omit<User, 'password'> | null = await prisma.user.findUnique({
@@ -34,9 +37,12 @@ export const signUpController = async (req: Request, res: Response) => {
         });
 
         res.status(StatusCode.OK).json(user);
-    }
-    catch (err: any) {
+    } catch (err: any) {
         console.debug('SignUpError = ', err);
-        res.status(err.statusCode || StatusCode.INTERNAL_SERVER_ERROR).json({SignUpError: err});
+        if (err instanceof CHttpException) {
+            next(err);
+        } else {
+            res.status(err.statusCode || StatusCode.INTERNAL_SERVER_ERROR).json({SignUpError: err});
+        }
     }
 }
