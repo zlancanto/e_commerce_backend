@@ -3,7 +3,6 @@ import {validateAndParse} from "../../utils/zod";
 import {prisma} from "../../vars/prisma";
 import {UpdateProductSchema} from "../../schemas/product/update.product.schema";
 import {StatusCode} from "../../exceptions/enum";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import {handlerPrismaException} from "../../exceptions/handler.prisma.exception";
 import {PrismaExceptionData} from "../../types/prisma/prisma.exception.data";
 

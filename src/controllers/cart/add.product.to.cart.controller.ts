@@ -3,8 +3,6 @@ import {validateAndParse} from "../../utils/zod";
 import {AddProductToCartSchema} from "../../schemas/cart/add.product.to.cart.schema";
 import {prisma} from "../../vars/prisma";
 import {StatusCode} from "../../exceptions/enum";
-import {PrismaExceptionData} from "../../types/prisma/prisma.exception.data";
-import {handlerPrismaException} from "../../exceptions/handler.prisma.exception";
 
 export const addProductToCartController = async (req: Request, res: Response) => {
     const data = validateAndParse(AddProductToCartSchema, req.body, res);

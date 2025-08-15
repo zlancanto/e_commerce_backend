@@ -12,7 +12,7 @@ export const deleteCartController = async (req: Request, res: Response) => {
     if (!data) { return; }
 
     try {
-        const productInCartDeleted = await prisma.productInCart.deleteMany({
+        await prisma.productInCart.deleteMany({
             where: { cartId: id }
         });
         const cartDeleted = await prisma.cart.delete({
